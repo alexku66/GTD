@@ -1,0 +1,22 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+	version="2.4">
+
+	<servlet>
+		<servlet-name>DoThing</servlet-name>
+		<servlet-class>com.Manager</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DoThing</servlet-name>
+		<url-pattern>/DisplayTasks.do</url-pattern>
+	</servlet-mapping>
+
+	<listener>
+		<listener-class>
+			com.MyListener
+		</listener-class>
+	</listener>
+
+</web-app>
