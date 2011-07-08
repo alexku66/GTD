@@ -27,16 +27,13 @@ public class Manager extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-//		PrintWriter writer = resp.getWriter();
-//		writer.println("I'm doPosting");
-		
 		resp.setContentType( "text/html" );
 		
 		ServletContext sc = getServletContext();
 		TaskManager tm = (TaskManager) sc.getAttribute("tm");
 		
-		for (int i=0; i<3; i++) {
-			tm.addTask("thing #" + i);
+		if ( null != req.getParameter("newTask")) {
+			tm.addTask( req.getParameter("newTask") );
 		}
 		
 		RequestDispatcher rd = req.getRequestDispatcher("TaskManager.jsp");

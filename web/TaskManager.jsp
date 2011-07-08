@@ -8,13 +8,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Your Tasks, baby!</title>
 </head>
 <body>
 
-<h1 align="center">Click button to refresh</h1>
-
-<form method="POST" action"DisplayTasks.do"">
+<form method="POST" action="DisplayTasks.do">
+<center>
+Enter a new task: <input type="text" name="newTask" />
+</center>
+</form>
+<br />
+<br />
+<form method="POST" action="DisplayTasks.do">
 <center>
 <input type = "SUBMIT" value = "REFRESH" />
 </center>
@@ -28,10 +33,8 @@
 	ArrayList<String> list = tm.getTaskList();
 	Iterator<String> it = list.listIterator();
 	
-	int i=0;
-	
 	while(it.hasNext()) {
-		out.println(it.next());
+		out.print(it.next() + "<br />");
 	}
 %>
 
