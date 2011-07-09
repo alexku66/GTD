@@ -29,13 +29,17 @@ Enter a new task: <input type="text" name="newTask" />
 <p>
 
 <%
-	TaskManager tm = (TaskManager) getServletContext().getAttribute( "tm" );
+	TaskManager tm = (TaskManager) request.getSession().getAttribute( "tm" );
 	ArrayList<String> list = tm.getTaskList();
-	Iterator<String> it = list.listIterator();
 	
-	while(it.hasNext()) {
-		out.print(it.next() + "<br />");
+	if( null != list ) {
+		Iterator<String> it = list.listIterator();
+		
+		while(it.hasNext()) {
+			out.print(it.next() + "<br />");
+		}
 	}
+
 %>
 
 </body>

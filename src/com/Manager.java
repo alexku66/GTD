@@ -2,12 +2,13 @@ package com;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+import com.TaskManager;
 
 public class Manager extends HttpServlet {
 
@@ -29,14 +30,22 @@ public class Manager extends HttpServlet {
 		
 		resp.setContentType( "text/html" );
 		
-		ServletContext sc = getServletContext();
-		TaskManager tm = (TaskManager) sc.getAttribute("tm");
+		HttpSession session = req.getSession();
+		TaskManager tm;
 		
-		if ( null != req.getParameter("newTask")) {
-			tm.addTask( req.getParameter("newTask") );
+		if( session.isNew() ) {
+			tm = new TaskManager();
+		} else {
+			tm = (TaskManager) session.getAttribute( "tm" );
 		}
 		
-		RequestDispatcher rd = req.getRequestDispatcher("TaskManager.jsp");
+		if ( null != req.getParameter("newTask")) {
+			tm.addTask( req.getParameter( "newTask" ) );
+		}
+		
+		session.setAttribute( "tm", tm );
+		
+		RequestDispatcher rd = req.getRequestDispatcher( "TaskManager.jsp" );
 		rd.forward(req, resp);
 		
 	}

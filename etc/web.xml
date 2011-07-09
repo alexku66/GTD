@@ -6,6 +6,10 @@
 	<servlet>
 		<servlet-name>DoThing</servlet-name>
 		<servlet-class>com.Manager</servlet-class>
+		
+		<session-config>
+			<session-timeout>15</session-timeout> <!-- reminder: this is in minutes -->
+		</session-config>
 	</servlet>
 
 	<servlet-mapping>

@@ -1,7 +1,6 @@
 package com;
 
 import javax.servlet.*;
-import com.TaskManager;
 
 public class MyListener implements ServletContextListener {
 
@@ -21,9 +20,9 @@ public class MyListener implements ServletContextListener {
   @Override
   public void contextInitialized( ServletContextEvent event )
   {
-	  ServletContext sc = event.getServletContext();
-	  TaskManager taskManager = new TaskManager();
-	  //taskManager.addTask( "something" );
-	  sc.setAttribute( "tm", taskManager );
+//	  ServletContext sc = event.getServletContext();
+//	  TaskManager taskManager = new TaskManager();
+//	  //taskManager.addTask( "something" );
+//	  sc.setAttribute( "tm", taskManager );
   }
 }
