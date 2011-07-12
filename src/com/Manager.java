@@ -1,5 +1,8 @@
 package com;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -32,11 +35,25 @@ public class Manager extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		TaskManager tm;
+		String taskToBeAdded;
 		
 		if( session.isNew() ) {
 			tm = new TaskManager();
+			resp.getWriter().println("session is new! <br />");
 		} else {
 			tm = (TaskManager) session.getAttribute( "tm" );
+			resp.getWriter().println("session is old! <br />");
+		}
+		
+		String fileName = (String) req.getParameter( "username" );
+		File taskFile = new File( "/Library/Tomcat/Home/webapps/GTD/" + fileName + ".txt" );
+		
+		if( taskFile.exists() ) {
+			BufferedReader br = new BufferedReader( new FileReader( taskFile ) );
+			
+			while ( null != ( taskToBeAdded = br.readLine() ) ) {
+				tm.addTask( taskToBeAdded );
+			}			
 		}
 		
 		if ( null != req.getParameter("newTask")) {
