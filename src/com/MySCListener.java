@@ -2,7 +2,7 @@ package com;
 
 import javax.servlet.*;
 
-public class MyListener implements ServletContextListener {
+public class MySCListener implements ServletContextListener {
 
   /* (non-Javadoc)
    * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)

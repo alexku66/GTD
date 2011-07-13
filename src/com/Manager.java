@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -36,28 +35,31 @@ public class Manager extends HttpServlet {
 		HttpSession session = req.getSession();
 		TaskManager tm;
 		String taskToBeAdded;
+		String taskToWrite;
 		
 		if( session.isNew() ) {
 			tm = new TaskManager();
-			resp.getWriter().println("session is new! <br />");
+			
+			String fileName = (String) req.getParameter( "username" );
+			File taskFile = new File( "/Library/Tomcat/Home/webapps/GTD/" + fileName + ".txt" );
+			
+			if( taskFile.exists() ) {
+				BufferedReader br = new BufferedReader( new FileReader( taskFile ) );
+				
+				while ( null != ( taskToBeAdded = br.readLine() ) ) {
+					tm.addTask( taskToBeAdded );
+				}			
+			} else {
+				taskFile.createNewFile();
+			}
+			
+			session.setAttribute( "file", taskFile );
 		} else {
 			tm = (TaskManager) session.getAttribute( "tm" );
-			resp.getWriter().println("session is old! <br />");
 		}
 		
-		String fileName = (String) req.getParameter( "username" );
-		File taskFile = new File( "/Library/Tomcat/Home/webapps/GTD/" + fileName + ".txt" );
-		
-		if( taskFile.exists() ) {
-			BufferedReader br = new BufferedReader( new FileReader( taskFile ) );
-			
-			while ( null != ( taskToBeAdded = br.readLine() ) ) {
-				tm.addTask( taskToBeAdded );
-			}			
-		}
-		
-		if ( null != req.getParameter("newTask")) {
-			tm.addTask( req.getParameter( "newTask" ) );
+		if ( null != ( taskToWrite = req.getParameter( "newTask" ) ) ) {
+			tm.addTask( taskToWrite );
 		}
 		
 		session.setAttribute( "tm", tm );

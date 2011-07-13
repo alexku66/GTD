@@ -3,6 +3,18 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
+	<listener>
+		<listener-class>
+			com.MySCListener
+		</listener-class>
+	</listener>
+	
+	<listener>
+		<listener-class>
+			com.MySessionListener
+		</listener-class>
+	</listener>
+
 	<servlet>
 		<servlet-name>DoThing</servlet-name>
 		<servlet-class>com.Manager</servlet-class>
@@ -17,10 +29,5 @@
 		<url-pattern>/DisplayTasks.do</url-pattern>
 	</servlet-mapping>
 
-	<listener>
-		<listener-class>
-			com.MyListener
-		</listener-class>
-	</listener>
 
 </web-app>
