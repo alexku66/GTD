@@ -34,8 +34,10 @@ public class Manager extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		TaskManager tm;
+		
 		String taskToBeAdded;
 		String taskToWrite;
+		
 		
 		if( session.isNew() ) {
 			tm = new TaskManager();
@@ -48,7 +50,7 @@ public class Manager extends HttpServlet {
 				
 				while ( null != ( taskToBeAdded = br.readLine() ) ) {
 					tm.addTask( taskToBeAdded );
-				}			
+				}
 			} else {
 				taskFile.createNewFile();
 			}
@@ -58,15 +60,21 @@ public class Manager extends HttpServlet {
 			tm = (TaskManager) session.getAttribute( "tm" );
 		}
 		
-		if ( null != ( taskToWrite = req.getParameter( "newTask" ) ) ) {
-			tm.addTask( taskToWrite );
+		
+		
+		
+		if( "yes".equals( req.getParameter( "invalidate" ) ) ) {
+			session.invalidate();
+		} else {
+			if ( null != ( taskToWrite = req.getParameter( "newTask" ) ) ) {
+				tm.addTask( taskToWrite );
+			}
+			
+			session.setAttribute( "tm", tm );
+			
+			RequestDispatcher rd = req.getRequestDispatcher( "TaskManager.jsp" );
+			rd.forward(req, resp);
 		}
-		
-		session.setAttribute( "tm", tm );
-		
-		RequestDispatcher rd = req.getRequestDispatcher( "TaskManager.jsp" );
-		rd.forward(req, resp);
-		
 	}
 	
 }

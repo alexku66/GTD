@@ -21,6 +21,7 @@ Enter a new task: <input type="text" name="newTask" />
 <br />
 <form method="POST" action="DisplayTasks.do">
 <center>
+Check this if you want to invalidate the session: <input type="checkbox" name="invalidate" value="yes" /><br />
 <input type = "SUBMIT" value = "REFRESH" />
 </center>
 </form>

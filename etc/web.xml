@@ -3,6 +3,20 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
 	version="2.4">
 
+	<servlet>
+		<servlet-name>DoThing</servlet-name>
+		<servlet-class>com.Manager</servlet-class>
+		
+		<session-config>
+			<session-timeout>2</session-timeout> <!-- reminder: this is in minutes -->
+		</session-config>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DoThing</servlet-name>
+		<url-pattern>/DisplayTasks.do</url-pattern>
+	</servlet-mapping>
+
 	<listener>
 		<listener-class>
 			com.MySCListener
@@ -14,20 +28,5 @@
 			com.MySessionListener
 		</listener-class>
 	</listener>
-
-	<servlet>
-		<servlet-name>DoThing</servlet-name>
-		<servlet-class>com.Manager</servlet-class>
-		
-		<session-config>
-			<session-timeout>15</session-timeout> <!-- reminder: this is in minutes -->
-		</session-config>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>DoThing</servlet-name>
-		<url-pattern>/DisplayTasks.do</url-pattern>
-	</servlet-mapping>
-
 
 </web-app>

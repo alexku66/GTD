@@ -30,15 +30,15 @@ public class MySessionListener implements HttpSessionListener{
 		try {
 			BufferedWriter bw = new BufferedWriter( new FileWriter ( fileToWriteTo ) );
 			
-			bw.write( "something" );
+			//bw.write( "something" );
 			
-//			while( it.hasNext() ) {
-//				bw.write( (String) it.next() );
-//				bw.newLine();
-//			}
-//			
+			while( it.hasNext() ) {
+				bw.write( (String) it.next() );
+				bw.newLine();
+			}
+			
 //			bw.flush();
-//			bw.close();
+			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
